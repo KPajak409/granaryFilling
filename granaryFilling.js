@@ -33,7 +33,7 @@ function getMaxResource(resources) {
   let max = 0;
   resources.forEach((resource) => {
     resource = resource.innerText.replace(".", "");
-    if (resource > max) max = resource;
+    if (parseInt(resource) > max) max = resource;
   });
   return max;
 }
@@ -42,11 +42,13 @@ function sortTableByGranaryFill(table) {
   let indexes = [];
   let tableCells = [];
   let rawHTML = [];
+
   for (let i = 0; i < table.length; i++) {
     indexes.push(i);
     tableCells.push(table[i].querySelectorAll("td")[4].innerText);
     rawHTML.push(table[i].innerHTML);
   }
+
   if (sortOrder == 0) {
     for (let i = 0; i < table.length; i++) {
       for (let j = 0; j < table.length - 1; j++) {
@@ -61,6 +63,7 @@ function sortTableByGranaryFill(table) {
       }
     }
   }
+
   if (sortOrder == 1) {
     for (let i = 0; i < table.length; i++) {
       for (let j = 0; j < table.length - 1; j++) {
@@ -75,6 +78,7 @@ function sortTableByGranaryFill(table) {
       }
     }
   }
+
   for (let i = 0; i < indexes.length; i++)
     table[i].innerHTML = rawHTML[indexes[i]];
 
